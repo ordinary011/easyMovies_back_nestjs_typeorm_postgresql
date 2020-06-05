@@ -16,14 +16,19 @@ export class UserService {
     return this.userRepository.find();
   }
 
-  async createUser(dto: CreateUserDto): Promise<string> {
-    // check uniqueness of email
-    const { first_name, last_name, email, password } = dto;
+  async findByEmail(email: string): Promise<any> {
     const qb = await getRepository(UserEntity)
       .createQueryBuilder('users')
       .where('users.email = :email', { email });
 
-    const user = await qb.getOne();
+    return await qb.getOne();
+  }
+
+  async createUser(dto: CreateUserDto): Promise<string> {
+    const { first_name, last_name, email, password } = dto;
+
+    // check uniqueness of email
+    const user = await this.findByEmail(email);
     if (user) {
       const errors = { createUser: 'Email must be unique.' };
       throw new HttpException(

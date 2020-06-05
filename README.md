@@ -11,3 +11,8 @@ CREATE TABLE users (
 INSERT INTO users (email, password, first_name, last_name)
 VALUES ('gogo@ttd.ttt', 'dffff', 'mogo', 'mobo');
 
+// create user
+// curl -X POST http://localhost:3000/user -d '{"first_name": "john", "last_name": "mibi", "email": "gogo@tt.ttt", "password": "123456"}' -H "Content-Type: application/json"
+
+//login
+// curl -X POST http://localhost:3000/auth/login -d '{"email": "john", "password": "123456"}' -H "Content-Type: application/json"
