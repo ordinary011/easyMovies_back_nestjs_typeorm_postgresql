@@ -1,8 +1,8 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, getRepository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { UserEntity } from './user.entity';
-import { CreateUserDto } from './dto/create-user.dto';
+import { CreateUserDto } from './dto/CreateUserDto';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()
@@ -16,19 +16,23 @@ export class UserService {
     return this.userRepository.find();
   }
 
-  async findByEmail(email: string): Promise<any> {
-    const qb = await getRepository(UserEntity)
-      .createQueryBuilder('users')
-      .where('users.email = :email', { email });
+  // async findByEmail(email: string): Promise<any> {
+  //   const qb = await getRepository(UserEntity)
+  //     .createQueryBuilder('users')
+  //     .where('users.email = :email', { email });
+  //
+  //   return await qb.getOne();
+  // }
 
-    return await qb.getOne();
+  async findOne(email: string): Promise<UserEntity> {
+    return await this.userRepository.findOne({ where: { email } });
   }
 
   async createUser(dto: CreateUserDto): Promise<string> {
     const { first_name, last_name, email, password } = dto;
 
     // check uniqueness of email
-    const user = await this.findByEmail(email);
+    const user = await this.findOne(email);
     if (user) {
       const errors = { createUser: 'Email must be unique.' };
       throw new HttpException(

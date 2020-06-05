@@ -15,4 +15,7 @@ VALUES ('gogo@ttd.ttt', 'dffff', 'mogo', 'mobo');
 // curl -X POST http://localhost:3000/user -d '{"first_name": "john", "last_name": "mibi", "email": "gogo@tt.ttt", "password": "123456"}' -H "Content-Type: application/json"
 
 //login
-// curl -X POST http://localhost:3000/auth/login -d '{"email": "john", "password": "123456"}' -H "Content-Type: application/json"
+// curl -X POST http://localhost:3000/auth/login -d '{"username": "gogo@tt.ttt", "password": "123456"}' -H "Content-Type: application/json"
+
+//simple check
+// curl http://localhost:3000/auth/profile -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZmlyc3RfbmFtZSI6ImpvaG4iLCJsYXN0X25hbWUiOiJtaWJpIiwiZW1haWwiOiJnb2dvQHR0LnR0dCIsImlhdCI6MTU5MTM5ODQ4MCwiZXhwIjoxNTkxNDAyMDgwfQ.rSiB0IgM5T4CmFtqLnqTAvcbBI_C6PtHFoIQ53Iy4Mg"
